@@ -1,30 +1,28 @@
 import 'dart:convert';
 
 class Movie {
-  String title;
-  String posterPath;
-  Movie({
-    required this.title,
-    required this.posterPath,
-  });
+  final int id;
+  final String title;
+  final String year;
+  final String genre;
+  final String poster;
 
-  String get fullImageUrl => 'https://image.tmdb.org/t/p/w200$posterPath';
+  Movie(this.id, this.title, this.year, this.genre, this.poster);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'poster_path': posterPath,
-    };
+  Movie.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        title = json["title"],
+        year = json["year"],
+        genre = json["genre"],
+        poster = json["poster"];
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['year'] = this.year;
+    data['genre'] = this.genre;
+    data['poster'] = this.poster;
+    return data;
   }
-
-  factory Movie.fromMap(Map<String, dynamic> map) {
-    return Movie(
-      title: map['title'] ?? '',
-      posterPath: map['poster_path'] ?? '',
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Movie.fromJson(String source) => Movie.fromMap(json.decode(source));
 }

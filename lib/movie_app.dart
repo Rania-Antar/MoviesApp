@@ -13,7 +13,7 @@ class MovieApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
